@@ -3,7 +3,7 @@
 <template>
   <header class="bg-dark text-white py-2">
     <div class="container d-flex justify-content-center align-items-center">
-      <h1 class="h3">Song Manager</h1>
+      <h1 class="h3">Album Manager</h1>
     </div>
   </header>
 </template>

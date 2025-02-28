@@ -1,7 +1,5 @@
 <script setup lang="ts"></script>
 
-<template>
-  <div>oui</div>
-</template>
+<template></template>
 
 <style scoped></style>
