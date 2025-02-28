@@ -9,7 +9,6 @@ const newAlbumName = ref<string>("");
 const newAlbumDescription = ref<string>("");
 const newAlbumStock = ref<number>(0);
 const newAlbumPrice = ref<number>(0);
-const albums = ref<Album[]>([]);
 
 const submitAlbum = () => {
   const newAlbum: Album = {
@@ -20,8 +19,7 @@ const submitAlbum = () => {
     price: newAlbumPrice.value,
   };
 
-  albums.value.push(newAlbum);
-  emit("update:albums", albums.value);
+  emit("update:albums", newAlbum);
 
   newAlbumName.value = "";
   newAlbumDescription.value = "";
