@@ -19,7 +19,7 @@ const onSearch = () => {
       class="form-control"
       v-model="searchQuery"
       @input="onSearch"
-      placeholder="Search for an album..."
+      placeholder="Rechercher un album..."
     />
   </div>
 </template>

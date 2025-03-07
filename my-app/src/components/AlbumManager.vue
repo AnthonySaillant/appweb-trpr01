@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import AddAlbumForm from "./AddAlbumForm.vue";
 import EditAlbumForm from "./EditAlbumForm.vue";
 import AlbumItem from "./AlbumItem.vue";
 import DeleteConfirmation from "./DeleteConfirmation.vue";
+import OutOfStock from "./OutOfStock.vue"; // Import the new component
 import type { Album } from "../types";
 
+// Existing states and functions
 const albums = ref<Album[]>([]);
 const showAddForm = ref(false);
 const selectedAlbum = ref<Album | null>(null);
@@ -48,6 +50,64 @@ const handleDuplicateAlbum = (album: Album) => {
   duplicateAlbumData.value = { ...album, id: nextId };
   showAddForm.value = true;
 };
+
+// New function to export albums to CSV
+const exportToCSV = () => {
+  const headers = ["ID", " Title", " Artist", " Genre", " Release Date"];
+  const rows = albums.value.map((album) => [
+    album.id,
+    album.name,
+    album.description,
+    album.stock,
+    album.price,
+  ]);
+
+  let csvContent =
+    "data:text/csv;charset=utf-8," +
+    headers.join(",") +
+    "\n" +
+    rows.map((row) => row.join(", ")).join("\n");
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "albums.csv");
+  link.click();
+};
+
+// Pre-fill the album list with 4 metal albums on component mount
+onMounted(() => {
+  albums.value = [
+    {
+      id: nextId++,
+      name: "Master of Puppets",
+      description: "Metallica",
+      stock: 0,
+      price: 12.99,
+    },
+    {
+      id: nextId++,
+      name: "The Number of the Beast",
+      description: "Iron Maiden",
+      stock: 5,
+      price: 10.99,
+    },
+    {
+      id: nextId++,
+      name: "Painkiller",
+      description: "Judas Priest",
+      stock: 0,
+      price: 14.99,
+    },
+    {
+      id: nextId++,
+      name: "Reign in Blood",
+      description: "Slayer",
+      stock: 3,
+      price: 13.49,
+    },
+  ];
+});
 </script>
 
 <template>
@@ -62,17 +122,28 @@ const handleDuplicateAlbum = (album: Album) => {
       />
     </div>
 
-    <!-- Add New Album Button -->
-    <div class="d-flex justify-content-end">
+    <!-- Button Section -->
+    <div class="d-flex justify-content-end mb-3">
+      <!-- Export Button -->
       <button
-        class="btn mb-3"
+        class="btn btn-primary me-3 d-flex align-items-center"
+        @click="exportToCSV"
+        style="height: 38px"
+      >
+        Exporter CSV
+      </button>
+
+      <!-- Add New Album Button -->
+      <button
+        class="btn mb-3 d-flex align-items-center"
         :class="showAddForm ? 'btn-danger' : 'btn-success'"
         @click="
           showAddForm = !showAddForm;
           duplicateAlbumData = null;
         "
+        style="height: 38px"
       >
-        {{ showAddForm ? "Annuler" : "Ajouter un nouvel album" }}
+        {{ showAddForm ? "Annuler l'addition" : "Ajouter un nouvel album" }}
       </button>
     </div>
 
@@ -89,6 +160,9 @@ const handleDuplicateAlbum = (album: Album) => {
       :album="selectedAlbum"
       @update:album="handleUpdateAlbum"
     />
+
+    <!-- Show Out of Stock Albums -->
+    <OutOfStock :albums="albums" />
 
     <!-- Album List Section -->
     <h2>Liste d'Albums</h2>
@@ -112,3 +186,5 @@ const handleDuplicateAlbum = (album: Album) => {
     />
   </div>
 </template>
+
+<style scoped></style>

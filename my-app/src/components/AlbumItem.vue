@@ -40,7 +40,7 @@ const stockColor = (stock: number) => {
           <span :class="stockColor(album.stock)">{{ album.stock }}</span>
         </p>
 
-        <p class="m-0"><strong>Prix:</strong> {{ album.price }}</p>
+        <p class="m-0"><strong>Prix:</strong> {{ album.price }}$</p>
       </div>
     </div>
 
