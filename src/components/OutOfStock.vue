@@ -15,24 +15,24 @@ const outOfStockAlbums = computed(() => {
   return props.albums.filter((album) => album.stock === 0);
 });
 
-// Auto-dismiss alert after 5 seconds
+//chat gpt pour le timer
 onMounted(() => {
   nextTick(() => {
     if (outOfStockAlbums.value.length > 0) {
       setTimeout(() => {
         showAlert.value = false;
-      }, 5000); // Hide alert after 5 seconds
+      }, 5000);
     }
   });
 });
 
 const closeAlert = () => {
-  showAlert.value = false; // Manually close the alert
+  showAlert.value = false;
 };
 </script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
-  <!-- Out of Stock Albums Section -->
   <div
     v-if="showAlert && outOfStockAlbums.length > 0"
     class="alert alert-danger alert-dismissible fade show"
@@ -56,3 +56,5 @@ const closeAlert = () => {
     ></button>
   </div>
 </template>
+
+<style scoped></style>

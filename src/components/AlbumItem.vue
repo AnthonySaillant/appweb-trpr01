@@ -16,14 +16,14 @@ const toggleDetails = () => {
   showDetails.value = !showDetails.value;
 };
 
-// Method to apply the correct text color for the stock value
 const stockColor = (stock: number) => {
-  if (stock === 0) return "text-danger"; // Red for 0 stock
-  if (stock <= 5) return "text-warning"; // Orange for 5 or less
-  return "text-success"; // Green for more than 5
+  if (stock === 0) return "text-danger";
+  if (stock <= 5) return "text-warning";
+  return "text-success";
 };
 </script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
   <li class="list-group-item d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center gap-4 w-100">
@@ -32,7 +32,6 @@ const stockColor = (stock: number) => {
       <div v-if="showDetails" class="d-flex gap-4">
         <p class="m-0"><strong>Description:</strong> {{ album.description }}</p>
 
-        <!-- Apply color to both Quantité and the stock value -->
         <p class="m-0">
           <strong class="d-inline" :class="stockColor(album.stock)"
             >Quantité:</strong

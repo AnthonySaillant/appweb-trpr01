@@ -1,5 +1,21 @@
-# Vue 3 + TypeScript + Vite
+Description du projet:
+Ce site est un gestionnaire d'album qui simule un magasin.
+On peut voir le nom, une description, un stock et un prix pour chaque album.
+On peut ajouter, dupliquer, modifier et supprimer les albums.
+On peut rechercher les albums par leur nom.
+Les utilisateurs sont alertés lorsqu'un album n'est plus en stock.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Toute mention et description d’utilisation d’une IA:
+-Une grande majorité du bootstrap est généré par Chatgpt (affichage)
+-L'export des donnés a été généré par Chatgpt
+-Certaines fonctionalités de Vue
+-immediate
+-deep
+-Object.values
+-Timer pour l'alerte
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+URL du repo GitHub:
+https://github.com/AnthonySaillant/appweb-trpr01
+
+URL du site déployé:
+https://anthonysaillant.github.io/appweb-trpr01/

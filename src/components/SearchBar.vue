@@ -12,6 +12,7 @@ const onSearch = () => {
 };
 </script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
   <div class="mb-4">
     <input

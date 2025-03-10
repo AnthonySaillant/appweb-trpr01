@@ -18,7 +18,7 @@ watch(
     updatedAlbumStock.value = newAlbum.stock;
     updatedAlbumPrice.value = newAlbum.price;
   },
-  { deep: true }
+  { deep: true } //chatgpt pour deep:true pour regarder a l'interieur de l'objet et non seulement la reference
 );
 
 const submitUpdate = () => {
@@ -34,11 +34,11 @@ const submitUpdate = () => {
 };
 
 const cancelEdit = () => {
-  // This can be adjusted to whatever you want to happen on cancel (e.g., go back to previous state)
-  emit("update:album", props.album); // Reset to original album
+  emit("update:album", props.album);
 };
 </script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
   <div class="card p-4 mb-4 shadow-sm">
     <h3 class="card-title mb-3">Modifier l'Album</h3>
@@ -83,7 +83,6 @@ const cancelEdit = () => {
         />
       </div>
 
-      <!-- Submit and Cancel Buttons -->
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Modifier l'Album</button>
         <button type="button" class="btn btn-danger" @click="cancelEdit">
@@ -93,3 +92,5 @@ const cancelEdit = () => {
     </form>
   </div>
 </template>
+
+<style scoped></style>

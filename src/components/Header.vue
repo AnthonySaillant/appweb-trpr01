@@ -1,5 +1,6 @@
 <script setup lang="ts"></script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
   <header class="bg-dark text-white py-2">
     <div class="container d-flex justify-content-center align-items-center">

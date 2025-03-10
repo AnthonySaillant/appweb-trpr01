@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from "vue";
+import { defineProps, defineEmits } from "vue";
 
 const props = defineProps({
   albumId: {
@@ -10,41 +10,49 @@ const props = defineProps({
 
 const emit = defineEmits();
 
-const show = ref(true);
-
-const close = () => {
-  show.value = false;
-  emit("close");
-};
-
 const confirmDeletion = () => {
   emit("deleteConfirmed", props.albumId);
-  close();
 };
 </script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
   <div
-    class="modal fade show"
+    class="modal fade"
+    id="deleteModal"
     tabindex="-1"
-    v-show="show"
-    @click.self="close"
-    style="display: block"
+    aria-labelledby="deleteModalLabel"
+    aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Confirmer la suppression</h5>
-          <button type="button" class="btn-close" @click="close"></button>
+          <h5 class="modal-title" id="deleteModalLabel">
+            Confirmer la suppression
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
         </div>
         <div class="modal-body">
-          <p>Voulez-vous vraiment supprimer cet album?</p>
+          <p>Voulez-vous vraiment supprimer cet album ?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="close">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
             Annuler
           </button>
-          <button type="button" class="btn btn-danger" @click="confirmDeletion">
+          <button
+            type="button"
+            class="btn btn-danger"
+            @click="confirmDeletion"
+            data-bs-dismiss="modal"
+          >
             Supprimer
           </button>
         </div>
@@ -53,8 +61,4 @@ const confirmDeletion = () => {
   </div>
 </template>
 
-<style scoped>
-.modal.fade {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-</style>
+<style scoped></style>

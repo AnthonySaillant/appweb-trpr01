@@ -4,10 +4,9 @@ import AddAlbumForm from "./AddAlbumForm.vue";
 import EditAlbumForm from "./EditAlbumForm.vue";
 import AlbumItem from "./AlbumItem.vue";
 import DeleteConfirmation from "./DeleteConfirmation.vue";
-import OutOfStock from "./OutOfStock.vue"; // Import the new component
+import OutOfStock from "./OutOfStock.vue";
 import type { Album } from "../types";
 
-// Existing states and functions
 const albums = ref<Album[]>([]);
 const showAddForm = ref(false);
 const selectedAlbum = ref<Album | null>(null);
@@ -25,7 +24,7 @@ const handleNewAlbum = (newAlbum: Album) => {
 
 const handleDeleteAlbum = (albumId: number) => {
   albumToDelete.value = albumId;
-  showDeleteConfirmation.value = true; // Show the confirmation modal
+  showDeleteConfirmation.value = true;
 };
 
 const handleDeleteConfirmed = (albumId: number) => {
@@ -51,7 +50,7 @@ const handleDuplicateAlbum = (album: Album) => {
   showAddForm.value = true;
 };
 
-// New function to export albums to CSV
+//chatgpt pour tout ce qui est en rapport au csv
 const exportToCSV = () => {
   const headers = ["ID", " Title", " Artist", " Genre", " Release Date"];
   const rows = albums.value.map((album) => [
@@ -75,7 +74,6 @@ const exportToCSV = () => {
   link.click();
 };
 
-// Pre-fill the album list with 4 metal albums on component mount
 onMounted(() => {
   albums.value = [
     {
@@ -110,9 +108,9 @@ onMounted(() => {
 });
 </script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
   <div class="container mt-4">
-    <!-- Image at the top -->
     <div class="text-center mb-4">
       <img
         src="/src/assets/TP1-SongManager-Logo.webp"
@@ -122,9 +120,7 @@ onMounted(() => {
       />
     </div>
 
-    <!-- Button Section -->
     <div class="d-flex justify-content-end mb-3">
-      <!-- Export Button -->
       <button
         class="btn btn-primary me-3 d-flex align-items-center"
         @click="exportToCSV"
@@ -133,7 +129,6 @@ onMounted(() => {
         Exporter CSV
       </button>
 
-      <!-- Add New Album Button -->
       <button
         class="btn mb-3 d-flex align-items-center"
         :class="showAddForm ? 'btn-danger' : 'btn-success'"
@@ -147,24 +142,20 @@ onMounted(() => {
       </button>
     </div>
 
-    <!-- Add New Album Form -->
     <AddAlbumForm
       v-show="showAddForm"
       @update:albums="handleNewAlbum"
       :prefilledAlbum="duplicateAlbumData"
     />
 
-    <!-- Edit Album Form -->
     <EditAlbumForm
       v-if="selectedAlbum"
       :album="selectedAlbum"
       @update:album="handleUpdateAlbum"
     />
 
-    <!-- Show Out of Stock Albums -->
     <OutOfStock :albums="albums" />
 
-    <!-- Album List Section -->
     <h2>Liste d'Albums</h2>
     <ul class="list-group">
       <li v-for="album in albums" :key="album.id" class="list-group-item">
@@ -177,7 +168,6 @@ onMounted(() => {
       </li>
     </ul>
 
-    <!-- Delete Confirmation Modal (Bootstrap) -->
     <DeleteConfirmation
       v-if="showDeleteConfirmation"
       :albumId="albumToDelete"

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, watch } from "vue";
 import type { Album } from "../types";
+
 const props = defineProps<{ prefilledAlbum?: Album | null }>();
 const emit = defineEmits<{ (event: "update:albums", album: Album): void }>();
 
+const minimumPriceOrStock = 0;
 const stringErrorMessage = "Ce champ ne peut pas être vide.";
 const numberMustBePositiveErrorMessage = "La valeur doit être au dessus de 0.";
 
@@ -29,16 +31,16 @@ watch(
       album.value = { ...newVal, id: 0 };
     }
   },
-  { immediate: true }
+  { immediate: true } //Chatgpt
 );
 
 const validateForm = () => {
   errors.value.name = album.value.name.trim() === "";
   errors.value.description = album.value.description.trim() === "";
-  errors.value.stock = album.value.stock < 0;
-  errors.value.price = album.value.price < 0;
+  errors.value.stock = album.value.stock < minimumPriceOrStock;
+  errors.value.price = album.value.price < minimumPriceOrStock;
 
-  return !Object.values(errors.value).includes(true);
+  return !Object.values(errors.value).includes(true); //chatgpt pour retourer si une des valeurs est true
 };
 
 const addAlbum = () => {
@@ -49,9 +51,9 @@ const addAlbum = () => {
 };
 </script>
 
+<!-- Bootstrap par chatgpt -->
 <template>
   <div class="card p-3 mb-4">
-    <!-- Added mb-4 for bottom margin -->
     <h3>{{ prefilledAlbum ? "Album Dupliqué" : "Ajouter un Nouvel Album" }}</h3>
     <form @submit.prevent="addAlbum" class="needs-validation">
       <div class="mb-2">
