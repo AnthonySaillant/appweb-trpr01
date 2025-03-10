@@ -52,7 +52,7 @@ const handleDuplicateAlbum = (album: Album) => {
 
 //chatgpt pour tout ce qui est en rapport au csv
 const exportToCSV = () => {
-  const headers = ["ID", " Title", " Artist", " Genre", " Release Date"];
+  const headers = ["ID", " Nom", " Description", " Quantité", " Prix"];
   const rows = albums.value.map((album) => [
     album.id,
     album.name,
